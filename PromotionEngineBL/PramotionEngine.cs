@@ -12,8 +12,10 @@ namespace PromotionEngineBL
         {
             int totalAmt = 0;
 
-            totalAmt = products.FirstOrDefault(x => x.Id == SkuIdConstants.AId).Quantity * ProductPriceConstant.ProductPrice[SkuIdConstants.AId];
-
+            foreach (var item in products)
+            {
+                totalAmt += item.Quantity * ProductPriceConstant.ProductPrice[item.Id];
+            }
             return totalAmt;
         }
     }
