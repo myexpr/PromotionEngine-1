@@ -168,7 +168,7 @@ namespace PromotionEngineBLTest
         }
 
         [Test]
-        public void Buy_C_and_D_Product_Quantity_C1_D1_Should_Return_35_With_Discount()
+        public void Buy_C_and_D_Product_Quantity_C1_D1_Should_Return_30_With_Discount()
         {
             //Arrange
             List<Product> products = new List<Product>
@@ -181,11 +181,70 @@ namespace PromotionEngineBLTest
             int totalAmt = pramotionEngine.GetTotalBill(products);
 
             //Asert
-            Assert.AreEqual(35, totalAmt);
+            Assert.AreEqual(30, totalAmt);
         }
 
         #endregion
 
 
+        #region Scenarion Given in Test
+
+        [Test]
+        public void Scenario_A_Return_100()
+        {
+            //Arrange
+            List<Product> products = new List<Product>
+            {
+                new Product{Id = SkuIdConstants.AId,Quantity=1},
+                new Product{Id = SkuIdConstants.BId,Quantity=1},
+                new Product{Id = SkuIdConstants.CId,Quantity=1}
+            };
+
+            //Act
+            int totalAmt = pramotionEngine.GetTotalBill(products);
+
+            //Asert
+            Assert.AreEqual(100, totalAmt);
+        }
+
+        [Test]
+        public void Scenario_B_Return_370()
+        {
+            //Arrange
+            List<Product> products = new List<Product>
+            {
+                new Product{Id = SkuIdConstants.AId,Quantity=5},
+                new Product{Id = SkuIdConstants.BId,Quantity=5},
+                new Product{Id = SkuIdConstants.CId,Quantity=1}
+            };
+
+            //Act
+            int totalAmt = pramotionEngine.GetTotalBill(products);
+
+            //Asert
+            Assert.AreEqual(370, totalAmt);
+        }
+
+
+        [Test]
+        public void Scenario_C_Return_280()
+        {
+            //Arrange
+            List<Product> products = new List<Product>
+            {
+                new Product{Id = SkuIdConstants.AId,Quantity=3},
+                new Product{Id = SkuIdConstants.BId,Quantity=5},
+                new Product{Id = SkuIdConstants.CId,Quantity=1},
+                new Product{Id = SkuIdConstants.DId,Quantity=1}
+            };
+
+            //Act
+            int totalAmt = pramotionEngine.GetTotalBill(products);
+
+            //Asert
+            Assert.AreEqual(280, totalAmt);
+        }
+
+        #endregion
     }
 }

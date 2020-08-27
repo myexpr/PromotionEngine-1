@@ -29,17 +29,17 @@ namespace PromotionEngineBL.PromotionType
                 if (diff > 0)
                 {
                     finalAmt = diff * ProductPriceConstant.ProductPrice[SkuIdConstants.CId] +
-                                (productD.Quantity * 35);
+                                (productD.Quantity * 30);
                 }
                 else if (diff < 0)
                 {
                     finalAmt = Math.Abs(diff) * ProductPriceConstant.ProductPrice[SkuIdConstants.DId] +
-                                (productC.Quantity * 35);
+                                (productC.Quantity * 30);
 
                 }
                 else
                 {
-                    finalAmt = productD.Quantity * 35;
+                    finalAmt = productD.Quantity * 30;
                 }
             }
             return finalAmt;
