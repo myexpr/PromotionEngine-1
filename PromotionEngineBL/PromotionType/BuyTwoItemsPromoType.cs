@@ -10,6 +10,9 @@ namespace PromotionEngineBL.PromotionType
     {
         public int CalculateAmount(Product productC, Product productD)
         {
+            if (productC == null && productD == null)
+                return 0;
+
             int finalAmt = 0;
             if (productC != null && productD == null)
             {
@@ -18,6 +21,26 @@ namespace PromotionEngineBL.PromotionType
             else if (productD != null && productC == null)
             {
                 return productD.Quantity * ProductPriceConstant.ProductPrice[SkuIdConstants.DId];
+            }
+            else
+            {
+                int diff = productC.Quantity - productD.Quantity;
+
+                if (diff > 0)
+                {
+                    finalAmt = diff * ProductPriceConstant.ProductPrice[SkuIdConstants.CId] +
+                                (productD.Quantity * 35);
+                }
+                else if (diff < 0)
+                {
+                    finalAmt = Math.Abs(diff) * ProductPriceConstant.ProductPrice[SkuIdConstants.DId] +
+                                (productC.Quantity * 35);
+
+                }
+                else
+                {
+                    finalAmt = productD.Quantity * 35;
+                }
             }
             return finalAmt;
         }
