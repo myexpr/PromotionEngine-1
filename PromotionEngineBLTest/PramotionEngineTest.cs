@@ -66,6 +66,37 @@ namespace PromotionEngineBLTest
             //Asert
             Assert.AreEqual(80, totalAmt);
         }
+
+        [Test]
+        public void Buy_C_Product_Quantity_1_Should_Return_20()
+        {
+            //Arrange
+            List<Product> products = new List<Product>
+            {
+                new Product{Id = SkuIdConstants.CId,Quantity=1}
+            };
+
+            //Act
+            int totalAmt = pramotionEngine.GetTotalBill(products);
+
+            //Asert
+            Assert.AreEqual(20, totalAmt);
+        }
+        public void Buy_D_Product_Quantity_1_Should_Return_15()
+        {
+            //Arrange
+            List<Product> products = new List<Product>
+            {
+                new Product{Id = SkuIdConstants.DId,Quantity=1}
+            };
+
+            //Act
+            int totalAmt = pramotionEngine.GetTotalBill(products);
+
+            //Asert
+            Assert.AreEqual(15, totalAmt);
+        }
+
         #endregion
 
 
