@@ -1,5 +1,6 @@
 ﻿using PromotionEngineBL.Common;
 using PromotionEngineBL.Model;
+using PromotionEngineBL.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,16 +9,20 @@ namespace PromotionEngineBL.PromotionType
 {
     public class BuyNIteamPromoType
     {
+        IDiscountService discountService;
+
+        public BuyNIteamPromoType(IDiscountService _discountService)
+        {
+            discountService = _discountService;
+        }
+
         public int CalculateAmount(Product product)
         {
-            if (product.Id == SkuIdConstants.AId)
-            {
-                return (product.Quantity / 3) * 130 + product.Quantity % 3 * ProductPriceConstant.ProductPrice[SkuIdConstants.AId];
-            }
-            else
-            {
-                return (product.Quantity / 2) * 45 + product.Quantity % 2 * ProductPriceConstant.ProductPrice[SkuIdConstants.BId];
-            }
+            int productPrice = ProductPriceConstant.ProductPrice[product.Id];
+            Discount discount = discountService.BuyMultipleItemsDiscount(product.Id);
+            return 
+                (product.Quantity / discount.Quanity) * discount.FixedRate 
+                + (product.Quantity % discount.Quanity * productPrice);
         }
     }
 }

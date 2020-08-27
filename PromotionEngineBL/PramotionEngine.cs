@@ -1,6 +1,7 @@
 ﻿using PromotionEngineBL.Common;
 using PromotionEngineBL.Model;
 using PromotionEngineBL.PromotionType;
+using PromotionEngineBL.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace PromotionEngineBL
 
         public PramotionEngine()
         {
-            buyNIteamPromoType = new BuyNIteamPromoType();
-            buyTwoItemsPromoType = new BuyTwoItemsPromoType();
+            buyNIteamPromoType = new BuyNIteamPromoType(new DiscountService());
+            buyTwoItemsPromoType = new BuyTwoItemsPromoType(new DiscountService());
         }
 
         public int GetTotalBill(List<Product> products)
