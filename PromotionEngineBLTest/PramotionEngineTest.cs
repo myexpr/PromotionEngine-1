@@ -48,5 +48,22 @@ namespace PromotionEngineBLTest
             Assert.AreEqual(30, totalAmt);
         }
 
+        [Test]
+        public void Buy_A_And_B_Product_Quantity_1_Should_Return_80()
+        {
+            //Arrange
+            List<Product> products = new List<Product>
+            {
+                new Product{Id = SkuIdConstants.AId,Quantity=1},
+                new Product{Id = SkuIdConstants.BId,Quantity=1}
+            };
+
+            //Act
+            int totalAmt = pramotionEngine.GetTotalBill(products);
+
+            //Asert
+            Assert.AreEqual(80, totalAmt);
+        }
+
     }
 }
